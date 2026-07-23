@@ -25,7 +25,7 @@ def main() -> None:
         num_heads=num_heads,
     ).to(device)
 
-    q, k, v, scores = attention(x)
+    q, k, v, scores, weights = attention(x)
 
     print("scores shape:", scores.shape)
 
@@ -48,6 +48,28 @@ def main() -> None:
     assert torch.isneginf(scores[0, 0, 0, 1])
     assert torch.isneginf(scores[0, 0, 0, 2])
     assert torch.isneginf(scores[0, 0, 0, 3])
+
+    print("weights for batch 0, head 0:")
+    print(weights[0, 0])
+
+    print("weight row sums:")
+    print(weights[0, 0].sum(dim=-1))
+
+    assert weights.shape == (2, 4, 4, 4)
+
+    expected_sums = torch.ones(
+        4,
+        device=weights.device,
+    )
+
+    torch.testing.assert_close(
+        weights[0, 0].sum(dim=-1),
+        expected_sums,
+    )
+
+    assert weights[0, 0, 0, 1] == 0
+    assert weights[0, 0, 0, 2] == 0
+    assert weights[0, 0, 0, 3] == 0
 
     print("Q/K/V shape test passed")
     

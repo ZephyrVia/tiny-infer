@@ -75,4 +75,6 @@ class SelfAttention(nn.Module):
             float("-inf"),
         )
 
-        return q, k, v, scores
+        weights = torch.softmax(scores, dim=-1)
+
+        return q, k, v, scores, weights
