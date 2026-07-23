@@ -2,7 +2,7 @@
 
 import torch
 
-from tiny_infer import TinyDecoderModel
+from tiny_infer.model import TinyDecoderModel
 
 
 def main() -> None:

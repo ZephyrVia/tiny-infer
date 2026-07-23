@@ -2,7 +2,7 @@
 
 import torch
 
-from tiny_infer import RMSNorm
+from tiny_infer.rms_norm import RMSNorm
 
 
 def main() -> None:

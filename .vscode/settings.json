@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}"
+    ],
+    "python.analysis.languageServerMode": "full",
+    "python.analysis.indexing": true
+}

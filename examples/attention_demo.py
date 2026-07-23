@@ -2,7 +2,7 @@
 
 import torch
 
-from tiny_infer import SelfAttention
+from tiny_infer.attention import SelfAttention
 
 
 def main() -> None:

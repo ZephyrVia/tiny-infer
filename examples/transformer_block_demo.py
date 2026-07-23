@@ -2,7 +2,7 @@
 
 import torch
 
-from tiny_infer import TransformerBlock
+from tiny_infer.transformer_block import TransformerBlock
 
 
 def main() -> None:
