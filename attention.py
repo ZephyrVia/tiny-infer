@@ -58,4 +58,21 @@ class SelfAttention(nn.Module):
         # 防止点积结果随着 head_dim 增大而过大。
         scores = scores / math.sqrt(self.head_dim)
 
+        # 创建一个右上角为 True 的遮罩，表示未来 token。
+        causal_mask = torch.triu(
+            torch.ones(
+                scores.size(-2),
+                scores.size(-1),
+                dtype=torch.bool,
+                device=scores.device,
+            ),
+            diagonal=1,
+        )
+
+        # 把未来位置的分数改成负无穷。
+        scores = scores.masked_fill(
+            causal_mask,
+            float("-inf"),
+        )
+
         return q, k, v, scores

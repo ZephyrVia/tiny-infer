@@ -42,7 +42,12 @@ def main() -> None:
     assert k.shape == expected_shape
     assert v.shape == expected_shape
 
-    
+    print("scores for batch 0, head 0:")
+    print(scores[0, 0])
+
+    assert torch.isneginf(scores[0, 0, 0, 1])
+    assert torch.isneginf(scores[0, 0, 0, 2])
+    assert torch.isneginf(scores[0, 0, 0, 3])
 
     print("Q/K/V shape test passed")
     
