@@ -77,4 +77,7 @@ class SelfAttention(nn.Module):
 
         weights = torch.softmax(scores, dim=-1)
 
-        return q, k, v, scores, weights
+        # 按照注意力权重，混合各个 token 的 V。
+        context = torch.matmul(weights, v)
+
+        return q, k, v, scores, weights, context
